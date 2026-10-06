@@ -1,0 +1,35 @@
+{
+  "battery_id": "BAT_MOD_01",
+  "current_soh": 96.75,
+  "future_soh": 97.23,
+  "abhi": 85.2,
+  "vsi": 32.3,
+  "tsi": 95.7,
+  "csi": 44.8,
+  "psi": 63.4,
+  "dgi": 74.5,
+  "health_momentum": "Stable",
+  "behaviour_fingerprint": {
+    "voltage_stability": 44.3,
+    "thermal_stability": 93.8,
+    "current_stress": 43.9,
+    "power_stability": 58.1,
+    "degradation_behaviour": 79.1,
+    "anomaly_behaviour": 100.0,
+    "cycling_behaviour": 91.0
+  },
+  "degradation_rate_pct_per_100_cycles": 0.065,
+  "anomaly_risk": "MEDIUM",
+  "risk_score": 40.0,
+  "confidence_pct": 48.8,
+  "circularity_suitability_score": 82.4,
+  "safety_status": "SAFE",
+  "safety_override_triggered": false,
+  "final_circularity_decision": "NEEDS MONITORING",
+  "decision_explanation": [
+    "Moderate operational stress requires telemetry tracking"
+  ],
+  "primary_risk_drivers": [
+    "Severe voltage instability (VSI: 32.3)"
+  ]
+}

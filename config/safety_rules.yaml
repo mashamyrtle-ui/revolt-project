@@ -1,0 +1,47 @@
+# Independent Rule-Based Safety Engine Configuration
+# Research Prototype Safety Limits (Requires OEM/Cell manufacturer calibration for production)
+
+safety_rules:
+  critical_temperature:
+    enabled: true
+    parameter: "temperature"
+    upper_critical_limit: 60.0  # deg C (Cell thermal runaway risk threshold)
+    lower_critical_limit: -20.0 # deg C (Severe lithium plating risk under charge)
+    action: "HIGH-RISK / QUARANTINE"
+    severity: "CRITICAL"
+
+  rapid_temperature_rise:
+    enabled: true
+    parameter: "temperature_rate_of_change"  # dT/dt
+    critical_rate_limit: 1.5  # deg C per second or per cycle step
+    action: "HIGH-RISK / QUARANTINE"
+    severity: "CRITICAL"
+
+  extreme_voltage:
+    enabled: true
+    parameter: "voltage"
+    max_voltage_cutoff: 4.35  # V (for typical NMC/LCO/LFP cell level; will adapt if module)
+    min_voltage_cutoff: 2.20  # V (severe copper dissolution / overdischarge)
+    action: "HIGH-RISK / QUARANTINE"
+    severity: "CRITICAL"
+
+  excessive_voltage_imbalance:
+    enabled: true
+    parameter: "voltage_imbalance" # delta between min and max cell in module
+    max_imbalance_threshold: 0.150 # 150 mV imbalance
+    action: "REPAIR / SERVICE"
+    severity: "HIGH"
+
+  abnormal_overcurrent:
+    enabled: true
+    parameter: "current"
+    max_current_abs: 150.0  # A
+    action: "HIGH-RISK / QUARANTINE"
+    severity: "CRITICAL"
+
+  severe_thermal_anomaly:
+    enabled: true
+    parameter: "thermal_stress_index"
+    tsi_critical_cutoff: 15.0 # Very low thermal stability index
+    action: "HIGH-RISK / QUARANTINE"
+    severity: "CRITICAL"

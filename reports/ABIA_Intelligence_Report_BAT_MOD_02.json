@@ -1,0 +1,37 @@
+{
+  "battery_id": "BAT_MOD_02",
+  "current_soh": 94.86,
+  "future_soh": 96.45,
+  "abhi": 56.3,
+  "vsi": 22.4,
+  "tsi": 58.0,
+  "csi": 43.3,
+  "psi": 59.8,
+  "dgi": 62.9,
+  "health_momentum": "Stable",
+  "behaviour_fingerprint": {
+    "voltage_stability": 36.8,
+    "thermal_stability": 69.5,
+    "current_stress": 43.2,
+    "power_stability": 58.0,
+    "degradation_behaviour": 69.6,
+    "anomaly_behaviour": 100.0,
+    "cycling_behaviour": 91.0
+  },
+  "degradation_rate_pct_per_100_cycles": 4.5,
+  "anomaly_risk": "HIGH",
+  "risk_score": 55.0,
+  "confidence_pct": 27.1,
+  "circularity_suitability_score": 71.7,
+  "safety_status": "SAFE",
+  "safety_override_triggered": false,
+  "final_circularity_decision": "REPAIR / SERVICE",
+  "decision_explanation": [
+    "Elevated operational risk or thermal instability detected",
+    "Current SOH (94.9%) warrants servicing before redeployment"
+  ],
+  "primary_risk_drivers": [
+    "Moderate thermal stress (TSI: 58.0)",
+    "Severe voltage instability (VSI: 22.4)"
+  ]
+}

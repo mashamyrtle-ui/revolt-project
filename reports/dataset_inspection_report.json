@@ -1,0 +1,195 @@
+{
+  "summary": {
+    "file_name": "battery_telemetry_benchmark.csv",
+    "file_size_bytes": 1556996,
+    "total_rows": 18000,
+    "total_columns": 12,
+    "duplicate_rows": 0,
+    "number_of_batteries": 5,
+    "battery_identifiers": [
+      "BAT_MOD_01",
+      "BAT_MOD_02",
+      "BAT_MOD_03",
+      "BAT_MOD_04",
+      "BAT_MOD_05"
+    ]
+  },
+  "canonical_mappings": {
+    "voltage": "voltage",
+    "current": "current",
+    "temperature": "temperature",
+    "power": "power",
+    "soc": "soc",
+    "soh": "soh",
+    "cycle": "cycle_number",
+    "capacity": "capacity_ah",
+    "timestamp": "timestamp",
+    "battery_id": "battery_id",
+    "diagnostic": "is_anomaly"
+  },
+  "chronological_coverage": {
+    "available": true,
+    "start": "2025-01-01 08:00:00",
+    "end": "2025-01-03 09:59:50",
+    "median_dt_seconds": 10.0,
+    "is_monotonic": true
+  },
+  "estimated_sampling_hz": 0.1,
+  "columns": {
+    "timestamp": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_values": 18000
+    },
+    "battery_id": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_values": 5
+    },
+    "cycle_number": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 1.0,
+      "max": 120.0,
+      "mean": 60.5,
+      "std": 34.640775574564664,
+      "infinite_count": 0
+    },
+    "cycle_step": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 1.0,
+      "max": 30.0,
+      "mean": 15.5,
+      "std": 8.655681887346647,
+      "infinite_count": 0
+    },
+    "voltage": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 2.05,
+      "max": 4.35,
+      "mean": 2.959661183333333,
+      "std": 0.6066891053917793,
+      "infinite_count": 0
+    },
+    "current": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": -21.751,
+      "max": 44.466,
+      "mean": 18.944555222222228,
+      "std": 16.777555409283856,
+      "infinite_count": 0
+    },
+    "temperature": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 24.95,
+      "max": 259.68,
+      "mean": 46.50827611111111,
+      "std": 27.043637146407402,
+      "infinite_count": 0
+    },
+    "power": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": -94.618,
+      "max": 142.296,
+      "mean": 47.98987694444445,
+      "std": 52.475045544992874,
+      "infinite_count": 0
+    },
+    "soc": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 20.0,
+      "max": 95.0,
+      "mean": 57.5,
+      "std": 22.3854999083064,
+      "infinite_count": 0
+    },
+    "capacity_ah": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 41.0779,
+      "max": 50.4712,
+      "mean": 48.546517,
+      "std": 1.644863113812568,
+      "infinite_count": 0
+    },
+    "soh": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 82.156,
+      "max": 100.942,
+      "mean": 97.09303166666666,
+      "std": 3.289711167256633,
+      "infinite_count": 0
+    },
+    "is_anomaly": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.014444444444444444,
+      "std": 0.11931719654346082,
+      "infinite_count": 0
+    }
+  },
+  "feature_availability": {
+    "electrical_features": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "thermal_features": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "temporal_features": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "usage_soc_features": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "effective_resistance_proxy": {
+      "supported": true,
+      "status": "Available (Proxy dV/dI)",
+      "missing_inputs": [],
+      "note": "Named effective resistance proxy, not true internal resistance."
+    },
+    "coulomb_counting_capacity": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "equivalent_full_cycles": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    },
+    "target_current_soh": {
+      "supported": true,
+      "status": "Available",
+      "missing_inputs": []
+    }
+  }
+}

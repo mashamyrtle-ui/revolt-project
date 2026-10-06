@@ -1,0 +1,42 @@
+{
+  "battery_id": "BAT_MOD_05",
+  "current_soh": 83.63,
+  "future_soh": 96.32,
+  "abhi": 16.8,
+  "vsi": 43.5,
+  "tsi": 0.0,
+  "csi": 49.0,
+  "psi": 65.5,
+  "dgi": 59.6,
+  "health_momentum": "Stable",
+  "behaviour_fingerprint": {
+    "voltage_stability": 35.0,
+    "thermal_stability": 39.0,
+    "current_stress": 41.9,
+    "power_stability": 60.5,
+    "degradation_behaviour": 63.6,
+    "anomaly_behaviour": 0.0,
+    "cycling_behaviour": 91.3
+  },
+  "degradation_rate_pct_per_100_cycles": 18.996,
+  "anomaly_risk": "CRITICAL",
+  "risk_score": 100.0,
+  "confidence_pct": 17.5,
+  "circularity_suitability_score": 53.7,
+  "safety_status": "CRITICAL_VIOLATION",
+  "safety_override_triggered": true,
+  "final_circularity_decision": "HIGH-RISK / QUARANTINE",
+  "decision_explanation": [
+    "Safety override triggered by critical threshold violation",
+    "Safety violation: Critical Over-Temperature (Value: 115.47)",
+    "Safety violation: Rapid Temperature Rise (Thermal Runaway Precursor) (Value: 18.900000000000006)",
+    "Safety violation: Severe Overdischarge (Copper Dissolution) (Value: 2.05)",
+    "Safety violation: Severe Thermal Instability / Anomaly Flag (Value: 0.0)"
+  ],
+  "primary_risk_drivers": [
+    "Safety Violation: Critical Over-Temperature (115.47)",
+    "Safety Violation: Rapid Temperature Rise (Thermal Runaway Precursor) (18.900000000000006)",
+    "Safety Violation: Severe Overdischarge (Copper Dissolution) (2.05)",
+    "Safety Violation: Severe Thermal Instability / Anomaly Flag (0.0)"
+  ]
+}

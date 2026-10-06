@@ -1,0 +1,169 @@
+{
+  "baselines": {
+    "Linear_Regression": {
+      "train": {
+        "MAE": 0.4161,
+        "RMSE": 0.5218,
+        "R2": 0.6346,
+        "Max_Error": 2.1385,
+        "MAPE": 0.4205
+      },
+      "val": {
+        "MAE": 0.7453,
+        "RMSE": 1.0463,
+        "R2": 0.6518,
+        "Max_Error": 5.7351,
+        "MAPE": 0.7738
+      },
+      "test": {
+        "MAE": 2.7971,
+        "RMSE": 3.7928,
+        "R2": 0.112,
+        "Max_Error": 17.3813,
+        "MAPE": 3.0898
+      },
+      "overfitting_detected": true,
+      "generalization_diagnosis": "Moderate overfitting: Train MAE significantly lower than Test MAE"
+    },
+    "Ridge_Regression": {
+      "train": {
+        "MAE": 0.4165,
+        "RMSE": 0.5222,
+        "R2": 0.634,
+        "Max_Error": 2.1403,
+        "MAPE": 0.4209
+      },
+      "val": {
+        "MAE": 0.746,
+        "RMSE": 1.0478,
+        "R2": 0.6508,
+        "Max_Error": 5.7509,
+        "MAPE": 0.7746
+      },
+      "test": {
+        "MAE": 2.8016,
+        "RMSE": 3.7985,
+        "R2": 0.1094,
+        "Max_Error": 17.4058,
+        "MAPE": 3.095
+      },
+      "overfitting_detected": true,
+      "generalization_diagnosis": "Moderate overfitting: Train MAE significantly lower than Test MAE"
+    },
+    "Random_Forest": {
+      "train": {
+        "MAE": 0.1854,
+        "RMSE": 0.2849,
+        "R2": 0.891,
+        "Max_Error": 1.5518,
+        "MAPE": 0.1875
+      },
+      "val": {
+        "MAE": 0.8015,
+        "RMSE": 1.212,
+        "R2": 0.5328,
+        "Max_Error": 5.268,
+        "MAPE": 0.8349
+      },
+      "test": {
+        "MAE": 3.3639,
+        "RMSE": 4.8225,
+        "R2": -0.4356,
+        "Max_Error": 14.9093,
+        "MAPE": 3.7594
+      },
+      "overfitting_detected": true,
+      "generalization_diagnosis": "Moderate overfitting: Train MAE significantly lower than Test MAE"
+    },
+    "Gradient_Boosting": {
+      "train": {
+        "MAE": 0.147,
+        "RMSE": 0.2178,
+        "R2": 0.9363,
+        "Max_Error": 1.2216,
+        "MAPE": 0.1486
+      },
+      "val": {
+        "MAE": 0.7819,
+        "RMSE": 1.1851,
+        "R2": 0.5533,
+        "Max_Error": 5.0021,
+        "MAPE": 0.8134
+      },
+      "test": {
+        "MAE": 3.3534,
+        "RMSE": 4.8428,
+        "R2": -0.4477,
+        "Max_Error": 14.8715,
+        "MAPE": 3.7497
+      },
+      "overfitting_detected": true,
+      "generalization_diagnosis": "Moderate overfitting: Train MAE significantly lower than Test MAE"
+    }
+  },
+  "abia_predictor": {
+    "train": {
+      "MAE": 0.1903,
+      "RMSE": 0.2676,
+      "R2": 0.9039,
+      "Max_Error": 1.3989,
+      "MAPE": 0.1924
+    },
+    "val": {
+      "MAE": 0.7141,
+      "RMSE": 0.9314,
+      "R2": 0.7241,
+      "Max_Error": 4.5826,
+      "MAPE": 0.7354
+    },
+    "test": {
+      "MAE": 2.3558,
+      "RMSE": 3.3849,
+      "R2": 0.2927,
+      "Max_Error": 16.3516,
+      "MAPE": 2.604
+    },
+    "overfitting_detected": false,
+    "generalization_diagnosis": "Good generalization (Regularized residual fusion)"
+  },
+  "abhi_comparison": {
+    "equal_weights": {
+      "MAE": 33.519,
+      "RMSE": 34.021,
+      "Pearson_Correlation": 0.6605
+    },
+    "learned_constrained": {
+      "MAE": 15.834,
+      "RMSE": 19.384,
+      "Pearson_Correlation": 0.6902
+    },
+    "context_aware": {
+      "MAE": 15.803,
+      "RMSE": 19.378,
+      "Pearson_Correlation": 0.6895
+    }
+  },
+  "future_soh_forecasting": {
+    "short_term": {
+      "MAE": 3.4119,
+      "RMSE": 4.8649,
+      "R2": -0.4407,
+      "Max_Error": 15.2826,
+      "MAPE": 3.8161
+    },
+    "medium_term": {
+      "MAE": 3.7307,
+      "RMSE": 5.1856,
+      "R2": -0.5205,
+      "Max_Error": 14.9867,
+      "MAPE": 4.1875
+    },
+    "long_term": {
+      "MAE": 4.1814,
+      "RMSE": 5.6595,
+      "R2": -0.6509,
+      "Max_Error": 14.7514,
+      "MAPE": 4.7198
+    }
+  }
+}

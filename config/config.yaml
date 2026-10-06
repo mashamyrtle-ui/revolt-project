@@ -1,0 +1,80 @@
+# ABIA System Configuration
+# Research Prototype Configuration - Not an Automotive Safety Standard
+
+system:
+  name: "Aetherix Battery Intelligence Algorithm (ABIA)"
+  version: "1.0.0"
+  random_seed: 42
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  reports_dir: "reports"
+  docs_dir: "docs"
+  models_dir: "models/saved"
+
+data_split:
+  strategy: "chronological"
+  train_ratio: 0.60
+  val_ratio: 0.20
+  test_ratio: 0.20
+  battery_wise_evaluation: true
+
+feature_engineering:
+  rolling_windows:
+    short: 10
+    medium: 50
+    long: 200
+  physics:
+    calculate_effective_resistance: true
+    min_current_delta_for_reff: 0.5  # Amperes required for valid delta-V / delta-I proxy
+    capacity_integration_method: "trapezoidal"
+
+health_indices:
+  scale: [0.0, 100.0]
+  vsi:
+    lambda_v: 15.0
+    gamma_v: 2.0
+  tsi:
+    t_opt_min: 15.0
+    t_opt_max: 35.0
+    t_crit_delta: 25.0
+    alpha_t: 1.5
+  csi:
+    beta_i: 1.0
+  psi:
+    power_stress_quantile: 0.95
+  dgi:
+    theta_capacity: 0.60
+    theta_resistance: 0.40
+
+abhi:
+  methods_to_compare:
+    - "equal_weights"
+    - "learned_constrained"
+    - "context_aware"
+  default_method: "learned_constrained"
+  min_individual_weight: 0.05
+
+prediction_horizons:
+  cycles:
+    short_term: 10
+    medium_term: 50
+    long_term: 100
+
+circularity:
+  is_research_prototype: true
+  thresholds:
+    soh_recycle_limit: 65.0
+    soh_second_life_min: 65.0
+    soh_second_life_max: 80.0
+    soh_continue_use_min: 85.0
+    tsi_second_life_min: 68.0
+    vsi_second_life_min: 68.0
+    css_recycle_max: 42.0
+  css_weights:
+    w_soh: 0.35
+    w_future_soh: 0.20
+    w_abhi: 0.15
+    w_risk_inv: 0.15
+    w_confidence: 0.15

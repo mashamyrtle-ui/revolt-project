@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHERIX (ABIA) - EV Battery Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-logo">⚡</div>
+        <div class="brand-text">
+          <h1>AETHERIX <span>ABIA</span></h1>
+          <p class="subtitle">Battery Intelligence & Circularity Engine</p>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <div class="control-group">
+          <label for="batterySelector">SELECT MODULE / PACK</label>
+          <select id="batterySelector" class="select-input">
+            <option value="">Loading Batteries...</option>
+          </select>
+        </div>
+        <button id="refreshBtn" class="btn btn-outline" title="Reload telemetry">↻ Refresh</button>
+        <button id="exportBtn" class="btn btn-primary" title="Export ABIA Report">📄 Export Report</button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-grid">
+      <!-- Row 1: Executive KPI Banners -->
+      <section class="kpi-row">
+        <!-- Decision Card (Hero) -->
+        <div class="card decision-hero-card" id="decisionHeroCard">
+          <div class="card-label">FINAL CIRCULARITY DECISION</div>
+          <div class="decision-badge" id="decisionBadge">LOADING...</div>
+          <div class="decision-subtext" id="decisionSubtext">Evaluating multi-factor criteria...</div>
+          <div class="override-pill" id="overridePill" style="display:none;">⚠️ SAFETY OVERRIDE ACTIVE</div>
+        </div>
+
+        <!-- SOH Card -->
+        <div class="card kpi-card">
+          <div class="card-label">CURRENT SOH</div>
+          <div class="kpi-value" id="kpiCurrentSOH">--%</div>
+          <div class="kpi-meta">
+            <span>Forecast Horizon: <strong id="kpiFutureSOH">--%</strong></span>
+          </div>
+          <div class="soh-bar-track">
+            <div class="soh-bar-fill" id="sohBarFill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- ABHI Card -->
+        <div class="card kpi-card">
+          <div class="card-label">HEALTH SCORE (ABHI)</div>
+          <div class="kpi-value text-accent" id="kpiABHI">--</div>
+          <div class="kpi-meta">
+            <span>Degradation: <strong id="kpiDegRate">--%</strong> / 100 cyc</span>
+          </div>
+          <div class="progress-radial" id="abhiIndicator"></div>
+        </div>
+
+        <!-- Momentum Card -->
+        <div class="card kpi-card">
+          <div class="card-label">HEALTH MOMENTUM</div>
+          <div class="kpi-value-sm" id="kpiMomentum">--</div>
+          <div class="kpi-meta">
+            <span>Confidence: <strong id="kpiConfidence">--%</strong></span>
+          </div>
+          <div class="momentum-pulse" id="momentumPulse"></div>
+        </div>
+
+        <!-- Risk Level Card -->
+        <div class="card kpi-card">
+          <div class="card-label">ANOMALY / RISK LEVEL</div>
+          <div class="kpi-value-sm" id="kpiRisk">--</div>
+          <div class="kpi-meta">
+            <span>Circularity Score: <strong id="kpiCSS">--</strong>/100</span>
+          </div>
+          <div class="risk-meter-track">
+            <div class="risk-meter-fill" id="riskMeterFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 2: Charts (SOH Trajectory & Radar Fingerprint) -->
+      <section class="chart-row-split">
+        <!-- SOH Trajectory & Forecasting -->
+        <div class="card chart-card large-chart">
+          <div class="card-header">
+            <h3>📈 SOH Degradation Trajectory & Future Horizon Forecast</h3>
+            <span class="badge-tag">Chronological Unseen Test</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="sohChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 7-D Behaviour Fingerprint (Radar) -->
+        <div class="card chart-card side-chart">
+          <div class="card-header">
+            <h3>🕸️ 7-D Behaviour Fingerprint</h3>
+            <span class="badge-tag">Operational Profile</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="fingerprintChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 3: Telemetry Dynamics (Voltage, Current, Temp) -->
+      <section class="chart-row-split">
+        <!-- Electro-Thermal Sensor Dynamics -->
+        <div class="card chart-card large-chart">
+          <div class="card-header">
+            <h3>⚡ Electro-Thermal Telemetry Dynamics (V, I, Temp)</h3>
+            <span class="badge-tag">Real-Time Sensor Bus</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="telemetryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Normalized Health Indices Breakdown -->
+        <div class="card chart-card side-chart">
+          <div class="card-header">
+            <h3>📊 Health Indices Breakdown (0 - 100)</h3>
+            <span class="badge-tag">VSI, TSI, CSI, PSI, DGI</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="indicesBarChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 4: Explainability & Decision Rationale -->
+      <section class="explainability-row">
+        <div class="card explain-card">
+          <div class="card-header">
+            <h3>💡 Explainability Rationale & Multi-Factor Attribution</h3>
+            <span class="badge-tag" id="explainTag">Domain Synthesis</span>
+          </div>
+          <div class="explain-content">
+            <div class="explain-col">
+              <h4>Decision Rationale</h4>
+              <ul id="decisionReasonsList" class="reasons-list">
+                <li>Loading decision reasons...</li>
+              </ul>
+            </div>
+            <div class="explain-col">
+              <h4>Risk & Physical Stress Drivers</h4>
+              <ul id="riskDriversList" class="drivers-list">
+                <li>Evaluating sensor boundaries...</li>
+              </ul>
+            </div>
+            <div class="explain-col">
+              <h4>Safety Engine Status</h4>
+              <div class="safety-box" id="safetyStatusBox">
+                <div class="safety-title" id="safetyStatusTitle">INSPECTING RULES</div>
+                <p id="safetyStatusDesc">Checking critical thresholds...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 5: ML Baseline Benchmark Comparison -->
+      <section class="benchmark-row">
+        <div class="card">
+          <div class="card-header">
+            <h3>🏆 Model Benchmarks: ML Baselines vs. ABIA Framework</h3>
+            <span class="badge-tag">Chronological Holdout Test</span>
+          </div>
+          <div class="table-responsive">
+            <table class="benchmark-table" id="benchmarkTable">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Test MAE</th>
+                  <th>Test RMSE</th>
+                  <th>Test R²</th>
+                  <th>Max Error</th>
+                  <th>Overfitting Diagnosis</th>
+                </tr>
+              </thead>
+              <tbody id="benchmarkTableBody">
+                <tr><td colspan="6">Loading benchmark evaluation...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>AETHERIX BATTERY INTELLIGENCE ALGORITHM (ABIA) &bull; Research Prototype Framework &bull; Not an Automotive Certified Safety Standard</p>
+    </footer>
+  </div>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
